@@ -1,0 +1,45 @@
+Django Project Template Loader
+==============================
+
+One common pattern for overriding Django app templates is to add an entry to
+`settings.TEMPLATE_DIRS` for a `templates/` directory in the project
+directory.  However, this makes it difficult to move projects from one place
+to another, or to deal with development environments that are not identical to
+the production environment.
+
+This app provides a template loader, 
+`'project_template_loader.loaders.project_directory.load_template_source'`, 
+which identifies the project directory, and loads templates from the 
+`templates/` directory within the project.  For instance, if your project is 
+located at `/sites/django/project`, and you are trying to load a template 
+named `search/base.html`, this loader will try to load the template from 
+`/sites/django/project/templates/search/base.html`.  
+
+In order to use this loader, add `'project_template_loader'` to your 
+`INSTALLED_APPS` setting, and add `'project_template_loader.loaders.project_directory.load_template_source'` to your `TEMPLATE_LOADERS` setting.
+In order to have these templates override default templates provided by apps,
+you need to include `'project_template_loader.loaders.project_directory.load_template_source'` before `'django.template.loaders.app_directories.load_template_source'`
+
+## License ##
+
+The MIT License
+
+Copyright (c) 2009 J. Cliff Dyer
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
